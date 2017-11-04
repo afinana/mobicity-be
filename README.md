@@ -1,47 +1,33 @@
-# generator-node-restify-mongodb
+# mobicity-be
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
 ## Introduction
 
-This Yeoman generator scaffolds a basic RESTful CRUD API service, a Node application, based on [Node.js](https://nodejs.org), [Restify](http://restify.com), and [MongoDB](https://www.mongodb.com).
+This project implements a basic RESTful CRUD API service, a Node application, based on [Node.js](https://nodejs.org), [Restify](http://restify.com), and [MongoDB](https://www.mongodb.com).
 
 According to their website, Restify, used most notably by [Netflix](http://techblog.netflix.com/2014/11/nodejs-in-flames.html), borrows heavily from [Express](http://expressjs.com). However, while Express is targeted at browser applications, with templating and rendering, Restify is keenly focused on building API services that are maintainable and observable.
 
 Along with Node, Restify, and MongoDB, the project also implements the following packages: [Bunyan](https://github.com/trentm/node-bunyan) (includes [DTrace](http://dtrace.org/blogs/about/) support), [Jasmine](https://github.com/mhevery/jasmine-node) (using [jasmine-node](https://github.com/mhevery/jasmine-node)), [Mongoose](http://mongoosejs.com/index.html), and [Grunt](http://gruntjs.com).
 
-Portions of this project's file structure and code are derived from what I consider the best parts of several different projects, including [generator-express](https://github.com/expressjs/generator), [generator-restify-mongo](https://github.com/lawrence-yu/generator-restify-mongo), and [generator-restify](https://github.com/chris-l/generator-restify).
+Portions of this project's file structure and code are derived from what the best parts of several different projects, including [generator-express](https://github.com/expressjs/generator), [generator-restify-mongo](https://github.com/lawrence-yu/generator-restify-mongo), and [generator-restify](https://github.com/chris-l/generator-restify).
 
 ## Installation
 
-To begin, install install [Yeoman](http://yeoman.io) and generator-node-restify-mongodb using [npm](https://www.npmjs.com/), using npm. The generator assumes you have pre-installed Node and MongoDB.
+To begin, install project dependencies using [npm](https://www.npmjs.com/), using npm. The project assumes you have pre-installed Node and MongoDB.
 
 ```shell
-npm install -g yo
-npm install -g generator-node-restify-mongodb
+cd mobicity-be
+npm install 
 ```
+## Using the Application
 
-Then, generate the new project.
-
-```bash
-mkdir node-restify-mongodb
-cd $_
-yo node-restify-mongodb
-```
-
-Yeoman scaffolds the application, creating the directory structure, copying required files, and running 'npm install' to load the npm package dependencies.
-
-![Scaffolding Project](preview.png)
-
-## Using the Generated Application
-
-Next, import the supplied set of sample widget documents into the local development instance of MongoDB from the supplied 'data/widgets.json' file.
+Next, import the supplied set of sample widget documents into the local development instance of MongoDB from the supplied 'data/events.json' file.
 
 ```bash
 NODE_ENV=development grunt mongoimport --verbose
 ```
 
-Similar to Yeoman's Express Generator, this application contains configuration for three typical environments: 'Development' (default), 'Test', and 'Production'. If you want to import the sample widget documents into your Test or Production instances of MongoDB, first change the 'NODE_ENV' environment variable value.
+This application contains configuration for three typical environments: 'Development' (default), 'Test', and 'Production'. If you want to import the sample widget documents into your Test or Production instances of MongoDB, first change the 'NODE_ENV' environment variable value.
 
 ```bash
 NODE_ENV=production grunt mongoimport --verbose
@@ -79,14 +65,14 @@ For more legible output, try [HTTPie](https://httpie.org/) or [prettyjson](https
 
 ```bash
 brew install httpie
-http http://localhost:3000/widgets
-http http://localhost:3000/widgets/SVHXPAWEOD
+http http://localhost:3000/events
+http http://localhost:3000/events/SVHXPAWEOD
 ```
 
 ```bash
 npm install -g prettyjson
-curl -X GET -H "Accept: application/json" "http://localhost:3000/widgets" --silent | prettyjson
-curl -X GET -H "Accept: application/json" "http://localhost:3000/widgets/SVHXPAWEOD" --silent | prettyjson
+curl -X GET -H "Accept: application/json" "http://localhost:3000/events" --silent | prettyjson
+curl -X GET -H "Accept: application/json" "http://localhost:3000/events/SVHXPAWEOD" --silent | prettyjson
 ```
 
 A much better RESTful API testing solution is [Postman](https://www.getpostman.com/). Postman provides the ability to individually configure each environment and abstract that environment-specific configuration, such as host and port, from the actual HTTP requests.
@@ -96,7 +82,7 @@ A much better RESTful API testing solution is [Postman](https://www.getpostman.c
 The scaffolded application includes the following endpoints.
 
 ```javascript
-# widget resources
+# events resources
 var PATH = '/widgets';
 server.get({path: PATH, version: VERSION}, findDocuments);
 server.get({path: PATH + '/:product_id', version: VERSION}, findOneDocument);
@@ -137,7 +123,7 @@ mongo
  > show dbs
  > use node-restify-mongodb-development
  > show tables
- > db.widgets.find()
+ > db.events.find()
   { "_id" : ObjectId("574cf9bb0f515d7c67a87026"), "product_id" : "4OZNPBMIDR", "name" : "Fapster", "color" : "Orange", "size" : "Medium", "price" : "29.99", "inventory" : 5 }
   { "_id" : ObjectId("574cf9bb0f515d7c67a87027"), "product_id" : "SVHXPAWEOD", "name" : "Voonex", "color" : "Green", "size" : "Medium", "price" : "$10.99", "inventory" : 50 }
   { "_id" : ObjectId("574cf9bb0f515d7c67a87028"), "product_id" : "3YIRGZ6TDW", "name" : "Groopster", "color" : "Yellow", "size" : "Large", "price" : "$99.95", "inventory" : 100 }

@@ -10,7 +10,7 @@
 'use strict';
 
 var _ = require('lodash');
-var Thing = require('./events.model');
+var Thing = require('./model/event.model');
 
 // Get list of things
 exports.index = function(req, res) {

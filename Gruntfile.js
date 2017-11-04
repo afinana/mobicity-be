@@ -24,7 +24,7 @@ module.exports = function (grunt) {
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
-    yeoman: {
+    mobicity: {
       // configurable paths
       dist: 'dist'
     },
@@ -114,10 +114,10 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*',
-            '!<%= yeoman.dist %>/.openshift',
-            '!<%= yeoman.dist %>/Procfile'
+            '<%= mobicity.dist %>/*',
+            '!<%= mobicity.dist %>/.git*',
+            '!<%= mobicity.dist %>/.openshift',
+            '!<%= mobicity.dist %>/Procfile'
           ]
         }]
       },

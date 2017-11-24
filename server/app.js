@@ -19,13 +19,15 @@ mongoose.connection.on('error', function(err) {
 	}
 );
 // Populate DB with sample data
-if(config.seedDB) { require('./config/seed'); }
+if (config.seedDB) {
+    require('./config/seed');
+}
 
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
 require('./config/express')(app);
-require('./routes')(app);
+require('./api/routes')(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {

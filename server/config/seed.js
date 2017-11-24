@@ -9,7 +9,7 @@ var EventsDB = require('../api/model/event.model');
 
 
 // Insert seed data below
-var eventSeed = require('../api/event/event.seed.json');
+var eventSeed = require('../data/events.seed.json');
 
 // Insert seed inserts below
 EventsDB.find({}).remove(function() {

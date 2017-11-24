@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/mobicitybe-dev'
+    uri: 'mongodb://localhost/mobicitybe'
   },
 
   seedDB: true

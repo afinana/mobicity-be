@@ -1,6 +1,4 @@
-# generator-node-restify-mongodb
-
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# opendata-node-backend
 
 ## Introduction
 
@@ -12,30 +10,11 @@ Along with Node, Restify, and MongoDB, the project also implements the following
 
 Portions of this project's file structure and code are derived from what I consider the best parts of several different projects, including [generator-express](https://github.com/expressjs/generator), [generator-restify-mongo](https://github.com/lawrence-yu/generator-restify-mongo), and [generator-restify](https://github.com/chris-l/generator-restify).
 
-## Installation
 
-To begin, install install [Yeoman](http://yeoman.io) and generator-node-restify-mongodb using [npm](https://www.npmjs.com/), using npm. The generator assumes you have pre-installed Node and MongoDB.
 
-```shell
-npm install -g yo
-npm install -g generator-node-restify-mongodb
-```
+## Using the Application
 
-Then, generate the new project.
-
-```bash
-mkdir node-restify-mongodb
-cd $_
-yo node-restify-mongodb
-```
-
-Yeoman scaffolds the application, creating the directory structure, copying required files, and running 'npm install' to load the npm package dependencies.
-
-![Scaffolding Project](preview.png)
-
-## Using the Generated Application
-
-Next, import the supplied set of sample widget documents into the local development instance of MongoDB from the supplied 'data/widgets.json' file.
+Next, import the supplied set of sample widget documents into the local development instance of MongoDB from the supplied 'data/events.seed.json' file.
 
 ```bash
 NODE_ENV=development grunt mongoimport --verbose
@@ -72,21 +51,21 @@ Grunt uses the grunt-mocha-istanbul module to execute the same set of jasmine-no
 You may test the running application, directly, by cURLing the '/widgets' endpoints.
 
 ```bash
-curl -X GET -H "Accept: application/json" "http://localhost:3000/widgets"
+curl -X GET -H "Accept: application/json" "http://localhost:9000/widgets"
 ```
 
 For more legible output, try [HTTPie](https://httpie.org/) or [prettyjson](https://www.npmjs.com/package/prettyjson).
 
 ```bash
 brew install httpie
-http http://localhost:3000/widgets
-http http://localhost:3000/widgets/SVHXPAWEOD
+http http://localhost:9000/api/events
+http http://localhost:9000/api/events/SVHXPAWEOD
 ```
 
 ```bash
 npm install -g prettyjson
-curl -X GET -H "Accept: application/json" "http://localhost:3000/widgets" --silent | prettyjson
-curl -X GET -H "Accept: application/json" "http://localhost:3000/widgets/SVHXPAWEOD" --silent | prettyjson
+curl -X GET -H "Accept: application/json" "http://localhost:9000/api/events" --silent | prettyjson
+curl -X GET -H "Accept: application/json" "http://localhost:9000/api/events/SVHXPAWEOD" --silent | prettyjson
 ```
 
 A much better RESTful API testing solution is [Postman](https://www.getpostman.com/). Postman provides the ability to individually configure each environment and abstract that environment-specific configuration, such as host and port, from the actual HTTP requests.
@@ -97,7 +76,7 @@ The scaffolded application includes the following endpoints.
 
 ```javascript
 # widget resources
-var PATH = '/widgets';
+var PATH = '/events';
 server.get({path: PATH, version: VERSION}, findDocuments);
 server.get({path: PATH + '/:product_id', version: VERSION}, findOneDocument);
 server.post({path: PATH, version: VERSION}, createDocument);
@@ -157,7 +136,7 @@ The scaffolded application relies on several environment variables to determine 
 ```javascript
 var NODE_ENV   = process.env.NODE_ENV   || 'development';
 var NODE_HOST  = process.env.NODE_HOST  || '127.0.0.1';
-var NODE_PORT  = process.env.NODE_PORT  || 3000;
+var NODE_PORT  = process.env.NODE_PORT  || 9000;
 var MONGO_HOST = process.env.MONGO_HOST || '127.0.0.1';
 var MONGO_PORT = process.env.MONGO_PORT || 27017;
 var LOG_LEVEL  = process.env.LOG_LEVEL  || 'info';
